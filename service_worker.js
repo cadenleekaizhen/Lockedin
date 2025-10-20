@@ -3,16 +3,16 @@ const urlsToCache = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./bike lock icon.png",
-  "./bike lock icon app.png",
-  "./Bike Lock Icon - Header.png",
-  "./CR7.png",
+  "./bike_lock_icon.png",
+  "./bike_lock_icon_192.png",
+  "./bike_lock_icon_header.png",
+  "./cr7.png",
   "./dashboard.html",
-  "./dashboard styles.css",
+  "./dashboard_style.css",
   "./global.css",
-  "./Hero Left.jpg",
-  "./Hero Right.webp",
-  "./home styles.css",
+  "./hero_left.jpg",
+  "./hero_right.webp",
+  "./home_style.css",
   "./script.js",
 ];
 
@@ -31,5 +31,6 @@ self.addEventListener("fetch", (event) => {
       .then((response) => response || fetch(event.request))
   );
 });
+
 
 
