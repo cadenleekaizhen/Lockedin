@@ -76,13 +76,14 @@ form.addEventListener("submit", function (event) {
       navigator.serviceWorker
         .register("./service_worker.js")
         .then(function() {
-          console.log("Service Worker registered")
+          console.log("Service Worker registered");
         })
         .catch(function(err) {
-          console.log("SW registration failed:", err)
-        })
-    })
+          console.log("SW registration failed:", err);
+        });
+    });
   }
+
 
 
 
