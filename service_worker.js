@@ -13,23 +13,27 @@ var urlsToCache = [
   "./hero_right.webp",
   "./home_style.css",
   "./script.js"
-];
+]
 
 // Install
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CacheName).then((cache) => cache.addAll(urlsToCache))
-  );
-});
+self.addEventListener("install", function(intsallEvent) {
+  intsallEvent.waitUntil(
+    caches.open(PWA).then(function(cache) {
+      cache.addAll(urlsToCache))
+    })
+})
 
 // Fetch (serve from cache if offline)
-self.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", function(fetchEvent) {
   event.respondWith(
     caches
-      .match(event.request)
-      .then((response) => response || fetch(event.request))
-  );
-});
+      .match(fetchEvent.request)
+      .then(function(response) {
+        return response || fetch(fetchEvent.request))
+      })
+    )
+})
+
 
 
 
