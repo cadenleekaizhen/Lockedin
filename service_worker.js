@@ -18,7 +18,7 @@ const urlsToCache = [
 
 // Install
 self.addEventListener("install", function(installEvent) {
-  intsallEvent.waitUntil(
+  installEvent.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       cache.addAll(urlsToCache);
     })
@@ -35,6 +35,7 @@ self.addEventListener("fetch", function(fetchEvent) {
       })
     );
 });
+
 
 
 
