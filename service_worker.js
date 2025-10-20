@@ -5,6 +5,7 @@ const urlsToCache = [
   "./manifest.json",
   "./bike_lock_icon.png",
   "./bike_lock_icon_192.png",
+  "./bike_lock_icon_512.png",
   "./bike_lock_icon_header.png",
   "./cr7.png",
   "./dashboard.html",
@@ -35,6 +36,7 @@ self.addEventListener("fetch", function(fetchEvent) {
       })
     );
 });
+
 
 
 
