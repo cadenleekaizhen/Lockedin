@@ -1,4 +1,5 @@
-var urlsToCache = [
+const CACHE_NAME = "PWA";
+const urlsToCache = [
   "./",
   "./index.html",
   "./manifest.json",
@@ -13,15 +14,16 @@ var urlsToCache = [
   "./hero_right.webp",
   "./home_style.css",
   "./script.js"
-]
+];
 
 // Install
-self.addEventListener("install", function(intsallEvent) {
+self.addEventListener("install", function(installEvent) {
   intsallEvent.waitUntil(
-    caches.open(PWA).then(function(cache) {
-      cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then(function(cache) {
+      cache.addAll(urlsToCache);
     })
-})
+  );
+});
 
 // Fetch (serve from cache if offline)
 self.addEventListener("fetch", function(fetchEvent) {
@@ -29,10 +31,11 @@ self.addEventListener("fetch", function(fetchEvent) {
     caches
       .match(fetchEvent.request)
       .then(function(response) {
-        return response || fetch(fetchEvent.request))
+        return response || fetch(fetchEvent.request));
       })
-    )
-})
+    );
+});
+
 
 
 
