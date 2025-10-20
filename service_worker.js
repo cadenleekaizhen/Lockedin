@@ -1,5 +1,4 @@
-const CACHE_NAME = "vehicle-dashboard-v1";
-const urlsToCache = [
+var urlsToCache = [
   "./",
   "./index.html",
   "./manifest.json",
@@ -13,13 +12,13 @@ const urlsToCache = [
   "./hero_left.jpg",
   "./hero_right.webp",
   "./home_style.css",
-  "./script.js",
+  "./script.js"
 ];
 
 // Install
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+    caches.open(CacheName).then((cache) => cache.addAll(urlsToCache))
   );
 });
 
@@ -31,6 +30,7 @@ self.addEventListener("fetch", (event) => {
       .then((response) => response || fetch(event.request))
   );
 });
+
 
 
 
