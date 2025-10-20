@@ -31,10 +31,11 @@ self.addEventListener("fetch", function(fetchEvent) {
     caches
       .match(fetchEvent.request)
       .then(function(response) {
-        return response || fetch(fetchEvent.request));
+        return response || fetch(fetchEvent.request);
       })
     );
 });
+
 
 
 
