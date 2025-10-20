@@ -71,9 +71,9 @@ form.addEventListener("submit", function (event) {
 
 // SW
 
-  if ("service_worker" in navigator) {
+  if ("serviceWorker" in navigator) {
     window.addEventListener("load", function() {
-      navigator.service_worker
+      navigator.serviceWorker
         .register("./service_worker.js")
         .then(function() {
           console.log("Service Worker registered")
@@ -83,6 +83,7 @@ form.addEventListener("submit", function (event) {
         })
     })
   }
+
 
 
 
