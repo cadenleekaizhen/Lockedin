@@ -4,7 +4,16 @@ const urlsToCache = [
   "./index.html",
   "./manifest.json",
   "./bike lock icon.png",
-  "./bike lock icon.png",
+  "./bike lock icon resized.jpg",
+  "./Bike Lock Icon - Header.png",
+  "./CR7.png",
+  "./dashboard.html",
+  "./dashboard styles.css",
+  "./global.css",
+  "./Hero Left.jpg",
+  "./Hero Right.webp",
+  "./home styles.css",
+  "./script.js",
 ];
 
 // Install
@@ -22,3 +31,4 @@ self.addEventListener("fetch", (event) => {
       .then((response) => response || fetch(event.request))
   );
 });
+
