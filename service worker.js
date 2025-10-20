@@ -4,7 +4,7 @@ const urlsToCache = [
   "./index.html",
   "./manifest.json",
   "./bike lock icon.png",
-  "./bike lock icon resized.jpg",
+  "./bike lock icon app.png",
   "./Bike Lock Icon - Header.png",
   "./CR7.png",
   "./dashboard.html",
@@ -31,4 +31,5 @@ self.addEventListener("fetch", (event) => {
       .then((response) => response || fetch(event.request))
   );
 });
+
 
