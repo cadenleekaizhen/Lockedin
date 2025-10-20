@@ -27,7 +27,7 @@ self.addEventListener("install", function(installEvent) {
 
 // Fetch (serve from cache if offline)
 self.addEventListener("fetch", function(fetchEvent) {
-  event.respondWith(
+  fetchEvent.respondWith(
     caches
       .match(fetchEvent.request)
       .then(function(response) {
@@ -35,6 +35,7 @@ self.addEventListener("fetch", function(fetchEvent) {
       })
     );
 });
+
 
 
 
