@@ -108,6 +108,11 @@ installButton.addEventListener("click", async () => {
   deferredPrompt = null;
 });
 
+window.addEventListener("appinstalled", () => {
+  console.log("PWA installed!");
+  document.getElementById("installButton").hidden = true;
+});
+
 
 
 
