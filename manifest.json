@@ -13,12 +13,13 @@
       "type": "image/png"
     },
     {
-      "src": "bike_lock_icon_192.png",
+      "src": "bike_lock_icon_512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ]
 }
+
 
 
 
