@@ -84,6 +84,29 @@ form.addEventListener("submit", function (event) {
     });
   }
 
+// Install
+let deferredPrompt;
+const installButton = document.getElementById("installButton");
+
+// Listen for the beforeinstallprompt event
+window.addEventListener("beforeinstallprompt", (e) => {
+  // Prevent the default mini-info bar from appearing
+  e.preventDefault();
+  deferredPrompt = e;
+  // Show your custom install button
+  installButton.hidden = false;
+});
+
+installButton.addEventListener("click", async () => {
+  // Hide the button
+  installButton.hidden = true;
+  // Show the browser's install prompt
+  deferredPrompt.prompt();
+  // Wait for user choice
+  const { outcome } = await deferredPrompt.userChoice;
+  console.log(`User response to the install prompt: ${outcome}`);
+  deferredPrompt = null;
+});
 
 
 
