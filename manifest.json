@@ -1,7 +1,7 @@
 {
   "name": "Bike Lock",
   "short_name": "Bike Lock",
-  "start_url": "./index.html",
+  "start_url": "/Lockedin/index.html",
   "display": "standalone",
   "background_color": "#0a0f1c",
   "theme_color": "#0077ff",
@@ -14,6 +14,7 @@
     }
   ]
 }
+
 
 
 
