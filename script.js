@@ -122,17 +122,15 @@ window.addEventListener("appinstalled", () => {
     // --- Adafruit IO Settings ---
     const ADAFRUIT_USERNAME = "maxlj002";
     const ADAFRUIT_IO_KEY = "aio_IEuq65exO8BSp5MZ7AxhnsBn9k76";
-    const LOCK_FEED = `https://io.adafruit.com/api/v2/${ADAFRUIT_USERNAME}/feeds/lock-control/data`;
+    const LOCK_FEED = `https://io.adafruit.com/api/v2/${ADAFRUIT_USERNAME}/feeds/lock-control/data;
 
     const toggle = document.getElementById("lockToggle");
     const statusText = document.getElementById("status");
 
-    toggle.addEventListener("change", async () => {
-      const state = toggle.checked ? "LOCK" : "UNLOCK";
-      statusText.textContent = toggle.checked ? "Locked" : "Unlocked";
-
+    // Function to send data to Adafruit IO
+    async function sendLock(state) {
       try {
-        const res = await fetch(LOCK_FEED, {
+        const response = await fetch(LOCK_FEED_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -141,12 +139,18 @@ window.addEventListener("appinstalled", () => {
           body: JSON.stringify({ value: state })
         });
 
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-        console.log(`Sent lock command: ${state}`);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        console.log(`✅ Sent lock command: ${state}`);
+        statusText.textContent = state === "LOCK" ? "Locked" : "Unlocked";
       } catch (err) {
-        console.error("Failed to send lock command:", err);
-        alert("Failed to send lock command. Check console.");
+        console.error("❌ Failed to send lock command:", err);
+        statusText.textContent = "Error sending command!";
       }
-    });
+    }
 
+ // Event listener for toggle switch
+    toggle.addEventListener("change", () => {
+      const state = toggle.checked ? "LOCK" : "UNLOCK";
+      sendLock(state);
+    });
 
