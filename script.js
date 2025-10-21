@@ -121,7 +121,7 @@ window.addEventListener("appinstalled", () => {
 
     // --- Adafruit IO Settings ---
     const ADAFRUIT_USERNAME = "maxlj002";
-    const ADAFRUIT_IO_KEY = "aio_IEuq65exO8BSp5MZ7AxhnsBn9k76";
+    const ADAFRUIT_IO_KEY = "API key";
     const LOCK_FEED = `https://io.adafruit.com/api/v2/${ADAFRUIT_USERNAME}/feeds/lock-control/data;
 
     const toggle = document.getElementById("lockToggle");
@@ -153,4 +153,5 @@ window.addEventListener("appinstalled", () => {
       const state = toggle.checked ? "LOCK" : "UNLOCK";
       sendLock(state);
     });
+
 
