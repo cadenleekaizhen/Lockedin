@@ -56,7 +56,7 @@ async function getLockState() {
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ action: "read" }),
 })
-  .then(data => resLock.json())
+  .then(data => res.json())
   .then(value => console.log(dataLock));
 
     // Only update UI if value has changed
@@ -128,7 +128,7 @@ async function getSpeed() {
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ action: "read" }),
 })
-  .then(data => resSpeed.json())
+  .then(data => res.json())
   .then(value => console.log(dataSpeed));
 
     if (value !== lastSpeed) {
@@ -414,4 +414,5 @@ setInterval(updateTimeAtLocation, 60000);
 
 // ===== START =====
 fetchLocationFromAdafruit();
+
 
