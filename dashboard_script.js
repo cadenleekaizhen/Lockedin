@@ -41,9 +41,6 @@ for (const item of dropDowns) {
 //
 //          LOCK
 //
-const username = "maxlj002";
-const aioKey = "";
-const feedLock = "lock";
 
 const toggle = document.getElementById("lockToggle");
 const statusText = document.getElementById("statusText");
@@ -54,14 +51,14 @@ let lastLockStatus = null; // store last value to avoid unnecessary UI updates
 // ✅ Get the latest value from Adafruit IO
 async function getLockState() {
   try {
-    const res = await fetch(
-      `https://io.adafruit.com/api/v2/${username}/feeds/${feedLock}/data/last`,
-      {
-        headers: { "X-AIO-Key": aioKey },
-      }
-    );
-    const data = await res.json();
-    const value = data.value.toUpperCase();
+    const res = await fetch("/.netlify/functions/adafruit", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ action: "read" }),
+})
+  .then(data => resLock.json())
+  .then(value => console.log(dataLock));
+
     // Only update UI if value has changed
     if (value !== lastLockStatus) {
       lastLockStatus = value;
@@ -78,13 +75,9 @@ async function getLockState() {
 async function sendLockState(value) {
   try {
     await fetch(
-      `https://io.adafruit.com/api/v2/${username}/feeds/${feedLock}/data`,
-      {
+      "/.netlify/functions/adafruit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-AIO-Key": aioKey,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ value }),
       }
     );
@@ -123,7 +116,6 @@ setInterval(getLockState, POLL_INTERVAL);
 //
 //    SPEED
 //
-const feedSpeed = "speed";
 
 const speedElement = document.getElementById("speed");
 let lastSpeed = null;
@@ -131,14 +123,13 @@ let lastSpeed = null;
 async function getSpeed() {
   try {
     const res = await fetch(
-      `https://io.adafruit.com/api/v2/${username}/feeds/${feedSpeed}/data/last`,
-      {
-        headers: { "X-AIO-Key": aioKey },
-      }
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const value = parseFloat(data.value);
+      "/.netlify/functions/adafruit", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ action: "read" }),
+})
+  .then(data => resSpeed.json())
+  .then(value => console.log(dataSpeed));
 
     if (value !== lastSpeed) {
       lastSpeed = value;
@@ -156,22 +147,20 @@ setInterval(getSpeed, POLL_INTERVAL);
 //
 //    DISTANCE
 //
-const feedDistance = "distance";
-
 const distanceElement = document.getElementById("distance");
 let lastDistance = null;
 
 async function getDistance() {
   try {
     const res = await fetch(
-      `https://io.adafruit.com/api/v2/${username}/feeds/${feedDistance}/data/last`,
-      {
-        headers: { "X-AIO-Key": aioKey },
-      }
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const value = parseFloat(data.value);
+      "/.netlify/functions/adafruit", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ action: "read" }),
+})
+  .then(data => res.json())
+  .then(value => console.log(data));
+
 
     if (value !== lastDistance) {
       lastDistance = value;
@@ -189,7 +178,6 @@ setInterval(getDistance, POLL_INTERVAL);
 //
 //    Alarm
 //
-const feedAlarm = "alarm";
 
 const alarmBtn = document.getElementById("alarmBtn");
 const alarmHistoryList = document.getElementById("alarmHistory");
@@ -207,14 +195,9 @@ async function ringAlarm() {
 // Send alarm value to Adafruit IO
 async function sendAlarm(value) {
   try {
-    await fetch(
-      `https://io.adafruit.com/api/v2/${username}/feeds/${feedAlarm}/data`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-AIO-Key": aioKey,
-        },
+    await fetch("/.netlify/functions/adafruit", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ value }),
       }
     );
@@ -226,13 +209,12 @@ async function sendAlarm(value) {
 // Fetch last 5 alarm ON events
 async function fetchAlarmHistory() {
   try {
-    const res = await fetch(
-      `https://io.adafruit.com/api/v2/${username}/feeds/${feedAlarm}/data?limit=20`,
-      {
-        headers: { "X-AIO-Key": aioKey },
-      }
-    );
-    const data = await res.json();
+    const res = await fetch("/.netlify/functions/adafruit", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ action: "read" }),
+})
+  .then(data => res.json())
 
     alarmHistoryList.innerHTML = "";
 
@@ -275,8 +257,6 @@ setInterval(fetchAlarmHistory, 3000);
 //    Map
 //
 
-// ===== CONFIGURATION =====
-const feedMap = "gps-location";
 // =========================
 // ===== VARIABLES =====
 let map, marker;
@@ -406,8 +386,12 @@ async function handleNewLocation(lat, lon, createdAt) {
 // ===== FETCH LOCATION FROM ADAFRUIT =====
 async function fetchLocationFromAdafruit() {
   try {
-    const res = await fetch(`https://io.adafruit.com/api/v2/${username}/feeds/${feedMap}/data/last`, { headers: { "X-AIO-Key": aioKey } });
-    const data = await res.json();
+    const res = await fetch("/.netlify/functions/adafruit", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ action: "read" }),
+})
+  .then(data => res.json())
 
     const lat = parseFloat(data.location?.lat);
     const lon = parseFloat(data.location?.lon);
@@ -430,3 +414,4 @@ setInterval(updateTimeAtLocation, 60000);
 
 // ===== START =====
 fetchLocationFromAdafruit();
+
