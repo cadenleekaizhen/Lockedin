@@ -89,10 +89,13 @@ export async function handler(event) {
 return {
   statusCode: 200,
   body: JSON.stringify({
-    lock: valueLock,
-    speed: valueSpeed,
-    distance: valueDistance,
-    alarm: dataAlarm,
-    map: dataMap,
+    valuelock: valueLock,
+    dataLock: dataLock,
+    dataSpeed: dataSpeed,
+    valueSpeed: valueSpeed,
+    valueDistance: valueDistance,
+    dataDistance: dataDistance,
+    dataAlarm: dataAlarm,
+    dataMap: dataMap,
   }),
 };
