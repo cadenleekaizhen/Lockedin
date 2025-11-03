@@ -1,3 +1,0 @@
-[build]
-  functions = "netlify/functions"
-  publish = "."  # or your output folder if using a build tool
